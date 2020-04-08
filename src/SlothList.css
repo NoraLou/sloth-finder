@@ -1,3 +1,7 @@
+.sloth-list {
+  width: 100%;
+}
+
 .sloth-list .img-wrapper {
   height: 200px;
   width: 200px;
@@ -5,5 +9,4 @@
   background-position: center;
   background-size: cover;
   margin: auto;
-
 }

@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import kevin from './images/kevin.jpg';
 import baby from './images/baby.jpg';
 import talulah from './images/talulah.jpg';
 import SlothList from './SlothList';
+import SlothDetails from './SlothDetails';
 
 import './App.css';
 
@@ -44,14 +45,28 @@ class App extends Component {
   }
 
   render() {
+    const getSloth = props => {
+      let name = props.match.params.name;
+      let currentSloth = this.props.sloths.find (
+        sloth => sloth.name.toLowerCase() === name.toLowerCase()
+      );
+      return <SlothDetails {...props} sloth={currentSloth} />
+    };
+
     return (
       <div className="App">
         <Switch>
-          <Route exact path ="/"
-             render={() => <SlothList sloths={this.props.sloths}/>}/>
+        <Route
+            exact
+            path ="/sloths"
+            render={() => <SlothList sloths={this.props.sloths}/>}/>
+          <Route
+            exact
+            path="/sloths/:name"
+            render={getSloth} />
+          <Redirect to='/sloths' />
         </Switch>
       </div>
-
     );
   }
 }
